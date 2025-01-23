@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -12,6 +11,8 @@
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
       <!-- fim bootstrap icons -->
     <link rel="stylesheet" href="style.css">
+
+    <script src="menu.js" defer></script>
     <title>Roberto Lopes</title>
 </head>
 <body>
@@ -38,6 +39,28 @@
                     <button>Contato</button>
                 </a>
             </div>
+
+            <div class="btn-abrir-menu" id="btn-menu">
+                <i class="bi bi-list"></i>
+            </div>
+
+            <div class="menu-mobile" id="menu-mobile">
+                <div class="btn-fechar">
+                    <i class="bi bi-x-lg"></i>
+                </div>
+
+                <nav>
+                    <ul>
+                        <li><a href="#inicio">Início</a></li>
+                        <li><a href="#especialidades">Especialidades</a></li>
+                        <li><a href="#sobre">Sobre</a></li>
+                        <li><a href="#projeto">Projetos</a></li>
+                        <li><a href="#">Contato</a></li>
+                    </ul>
+                </nav>
+
+            </div><!--menu-mobile-->
+            <div class="overlay-menu" id="overlay-menu"></div>
         </div><!--interface-->
     </header>
 
@@ -161,4 +184,27 @@
 
 
 </body>
+<!-- script de rolagem -->
+<script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault(); // Impede o comportamento padrão
+            const targetId = this.getAttribute('href'); // Obtém o ID do destino
+            const targetElement = document.querySelector(targetId);
+
+            if (targetElement) {
+                // Calcula o deslocamento considerando o cabeçalho
+                const headerHeight = document.querySelector('header').offsetHeight;
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.scrollY - headerHeight;
+
+                // Rola suavemente para a posição ajustada
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+</script>
 </html>
